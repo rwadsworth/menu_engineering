@@ -11,6 +11,7 @@ export function useMenuDailySeries(params: UseMenuDailySeriesParams): UseMenuDai
   const [data, setData] = useState<MenuDailySeriesResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
 
   const queryString = useMemo(() => {
     const query = new URLSearchParams();
@@ -27,7 +28,7 @@ export function useMenuDailySeries(params: UseMenuDailySeriesParams): UseMenuDai
     setLoading(true);
     setError(null);
 
-    fetch(`/api/menu/timeseries/daily${queryString ? `?${queryString}` : ""}`)
+    fetch(`${apiBaseUrl}/api/menu/timeseries/daily${queryString ? `?${queryString}` : ""}`)
       .then((res) => {
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
         return res.json() as Promise<MenuDailySeriesResponse>;
@@ -48,7 +49,7 @@ export function useMenuDailySeries(params: UseMenuDailySeriesParams): UseMenuDai
     return () => {
       cancelled = true;
     };
-  }, [queryString]);
+  }, [apiBaseUrl, queryString]);
 
   return { data, loading, error };
 }
