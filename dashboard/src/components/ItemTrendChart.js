@@ -1,0 +1,5 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, } from "recharts";
+export default function ItemTrendChart({ title, subtitle, data }) {
+    return (_jsxs("section", { className: "chart-card chart-card--analytics", children: [_jsx("h3", { className: "chart-title", children: title }), _jsx("p", { className: "chart-subtitle", children: subtitle }), _jsx(ResponsiveContainer, { width: "100%", height: 320, children: _jsxs(LineChart, { data: data, margin: { top: 12, right: 22, bottom: 20, left: 0 }, children: [_jsx(CartesianGrid, { strokeDasharray: "3 3", stroke: "#e5e7eb" }), _jsx(XAxis, { dataKey: "weekStart", tick: { fill: "#9ca3af", fontSize: 11 }, tickLine: false }), _jsx(YAxis, { domain: [0, 100], tick: { fill: "#9ca3af", fontSize: 11 }, tickLine: false }), _jsx(Tooltip, {}), _jsx(Line, { type: "monotone", dataKey: "popularity", name: "Popularity", stroke: "#2563eb", strokeWidth: 2.5, dot: false }), _jsx(Line, { type: "monotone", dataKey: "profitability", name: "Profitability", stroke: "#ea580c", strokeWidth: 2.5, dot: false })] }) })] }));
+}

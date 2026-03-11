@@ -1,0 +1,19 @@
+{
+  "name": "menu-engineering",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "dashboard"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:dashboard": "npm run dev --workspace=dashboard",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:dashboard\"",
+    "generate:data": "python data/scripts/generate_test_data.py",
+    "build": "npm run build --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
