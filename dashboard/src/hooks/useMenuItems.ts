@@ -11,11 +11,12 @@ export function useMenuItems(): UseMenuItemsResult {
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
 
   useEffect(() => {
     let cancelled = false;
 
-    fetch("/api/menu")
+    fetch(`${apiBaseUrl}/api/menu`)
       .then((res) => {
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
         return res.json() as Promise<MenuItem[]>;

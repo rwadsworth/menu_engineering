@@ -3,9 +3,10 @@ export function useMenuItems() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "";
     useEffect(() => {
         let cancelled = false;
-        fetch("/api/menu")
+        fetch(`${apiBaseUrl}/api/menu`)
             .then((res) => {
             if (!res.ok)
                 throw new Error(`API error: ${res.status} ${res.statusText}`);
