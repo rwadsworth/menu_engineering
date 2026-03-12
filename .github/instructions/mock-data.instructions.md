@@ -4,6 +4,12 @@ applyTo: "data/**,backend/src/data/**,dashboard/src/data/**"
 
 # Mock Data — Bella Napoli Italian Theme
 
+## Why This File Exists
+
+* Menu names and categories drive backend filters and dashboard dimensions.
+* Inconsistent category labels create silent breakage in trend grouping and charts.
+* Deterministic seeded data keeps local development and demos reproducible.
+
 All mock and seed data in this application represents **Bella Napoli**, an
 Italian trattoria & wine bar. Item names, categories, and descriptions must
 remain authentically Italian. Use the following category vocabulary:
@@ -27,6 +33,12 @@ remain authentically Italian. Use the following category vocabulary:
 
 > Do **not** introduce non-Italian items (e.g., "Ribeye Steak", "Garden Salad",
 > "Veggie Wrap") into mock data. Any new seed data must follow the Italian theme.
+
+## Category Consistency Rules
+
+* Category values must match the vocabulary above exactly (including capitalization).
+* Do not introduce near-duplicate labels like `Appetizers` when `Antipasti` already exists.
+* If a new category is truly required, update all affected backend and dashboard consumers in the same change.
 
 ## Faker Seeding
 
