@@ -58,3 +58,5 @@ npm run dev:dashboard  # http://localhost:5173
 ## Documentation
 
 - Data documentation index: [docs/data/index.md](docs/data/index.md)
+
+<!-- test: jira-cli + gh PR flow 2026-03-17 -->
