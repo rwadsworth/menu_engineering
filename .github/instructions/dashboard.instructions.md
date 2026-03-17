@@ -6,9 +6,9 @@ applyTo: "dashboard/**"
 
 ## Why This File Exists
 
-* This dashboard has paired TypeScript and JavaScript source files in `dashboard/src/`.
+* This dashboard uses TypeScript exclusively in `dashboard/src/`.
 * The API contract is local and evolving, so UI regressions usually come from shape drift.
-* These rules reduce accidental edits to generated files and keep visualizations stable.
+* These rules keep visualizations and the API contract stable.
 
 ## Chart Patterns
 
@@ -29,9 +29,9 @@ to spot declining Stars before they become Dogs.
 
 ## Source-Of-Truth Rules
 
-* Treat `*.ts` and `*.tsx` files as the source of truth.
-* Do not hand-edit paired `*.js` files in `dashboard/src/**` unless explicitly requested.
-* If a TypeScript change requires checked-in JavaScript mirrors, regenerate them via the normal build path instead of manual edits.
+* All source files in `dashboard/src/` are TypeScript (`.ts` / `.tsx`). There are no JavaScript mirrors.
+* Do not add `.js` or `.jsx` source files to `dashboard/src/`. Transpiled output lives only in `dist/`.
+* Vite handles TypeScript compilation at build time — no manual JS generation is needed.
 
 ## Contract & UX Safeguards
 
