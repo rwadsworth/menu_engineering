@@ -85,5 +85,6 @@ logic beyond the current session's agreed scope.
 workspace unless the team explicitly decides to re-enable it.
 
 ## 10. MCP Instructions
-* **Github** Use GitHhub CLI for any requests related to branching and pull requests
-* **Atlassian** Use Jira for task management.
+* **GitHub:** Use `gh` (GitHub CLI) for branch creation, push, and pull requests.
+* **Atlassian/Jira:** Use `jira` CLI for issue lookup, triage, and status management.
+* **Tool boundary:** Even when testing jira-cli, keep Git operations and PR creation in `gh`.
