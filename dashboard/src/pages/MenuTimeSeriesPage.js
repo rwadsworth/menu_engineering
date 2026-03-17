@@ -77,6 +77,36 @@ export default function MenuTimeSeriesPage() {
         }
         return rows;
     }, [data, weekMap]);
+    const migrationFlowData = useMemo(() => {
+        if (!data)
+            return [];
+        const sortedWeeks = [...data.dimensions.weeks].sort((a, b) => a.localeCompare(b));
+        const flowMap = new Map();
+        for (let i = 1; i < sortedWeeks.length; i += 1) {
+            const currentWeek = weekMap.get(sortedWeeks[i]);
+            const previousWeek = weekMap.get(sortedWeeks[i - 1]);
+            if (!currentWeek || !previousWeek)
+                continue;
+            Object.keys(currentWeek).forEach((itemName) => {
+                const current = currentWeek[itemName];
+                const previous = previousWeek[itemName];
+                if (!previous || current.quadrant === previous.quadrant)
+                    return;
+                const key = `${previous.quadrant}->${current.quadrant}`;
+                const existing = flowMap.get(key);
+                if (existing) {
+                    existing.value += 1;
+                    return;
+                }
+                flowMap.set(key, {
+                    fromQuadrant: previous.quadrant,
+                    toQuadrant: current.quadrant,
+                    value: 1,
+                });
+            });
+        }
+        return Array.from(flowMap.values()).sort((a, b) => b.value - a.value);
+    }, [data, weekMap]);
     const categoryTrendData = useMemo(() => {
         if (!data || data.dimensions.weeks.length < 2)
             return [];
