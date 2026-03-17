@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import type { MenuItemSnapshot } from "../data/menuTimeSeries";
 import ItemTrendChart from "../components/ItemTrendChart";
 import QuadrantMigrationChart from "../components/QuadrantMigrationChart";
-import QuadrantMigrationSankey from "../components/QuadrantMigrationSankey";
+// import QuadrantMigrationSankey from "../components/QuadrantMigrationSankey"; // restore with migrationFlowData when Sankey is re-enabled
 import CategoryTrendBars from "../components/CategoryTrendBars";
 import TopMoversTable from "../components/TopMoversTable";
 import AnimatedQuadrantMatrix from "../components/AnimatedQuadrantMatrix";
@@ -90,41 +90,6 @@ export default function MenuTimeSeriesPage() {
     }
 
     return rows;
-  }, [data, weekMap]);
-
-  const migrationFlowData = useMemo(() => {
-    if (!data) return [];
-
-    const sortedWeeks = [...data.dimensions.weeks].sort((a, b) => a.localeCompare(b));
-    const flowMap = new Map<string, { fromQuadrant: MenuItemSnapshot["quadrant"]; toQuadrant: MenuItemSnapshot["quadrant"]; value: number }>();
-
-    for (let i = 1; i < sortedWeeks.length; i += 1) {
-      const currentWeek = weekMap.get(sortedWeeks[i]);
-      const previousWeek = weekMap.get(sortedWeeks[i - 1]);
-      if (!currentWeek || !previousWeek) continue;
-
-      Object.keys(currentWeek).forEach((itemName) => {
-        const current = currentWeek[itemName];
-        const previous = previousWeek[itemName];
-        if (!previous || current.quadrant === previous.quadrant) return;
-
-        const key = `${previous.quadrant}->${current.quadrant}`;
-        const existing = flowMap.get(key);
-
-        if (existing) {
-          existing.value += 1;
-          return;
-        }
-
-        flowMap.set(key, {
-          fromQuadrant: previous.quadrant,
-          toQuadrant: current.quadrant,
-          value: 1,
-        });
-      });
-    }
-
-    return Array.from(flowMap.values()).sort((a, b) => b.value - a.value);
   }, [data, weekMap]);
 
   const categoryTrendData = useMemo(() => {
@@ -248,9 +213,7 @@ export default function MenuTimeSeriesPage() {
         />
       </div>
 
-      {/* <div id="quadrant-flow-sankey"> -- commented out, the data doesn't support something interesting
-        <QuadrantMigrationSankey data={migrationFlowData} />
-      </div> */}
+      {/* Sankey disabled: restore QuadrantMigrationSankey import and migrationFlowData useMemo when re-enabling */}
 
       <div id="quadrant-migration">
         <QuadrantMigrationChart data={migrationData} />
