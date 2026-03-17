@@ -83,3 +83,7 @@ logic beyond the current session's agreed scope.
 
 * **Markdown lint override:** Keep `MD022` disabled in `.markdownlint.json` for this
 workspace unless the team explicitly decides to re-enable it.
+
+## 10. MCP Instructions
+* **Github** Use GitHhub CLI for any requests related to branching and pull requests
+* **Atlassian** Use Jira for task management.
